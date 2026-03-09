@@ -8,7 +8,7 @@ class MovieSerializer(serializers.Serializer):
     description = serializers.CharField(max_length=255)
     duration = serializers.IntegerField(min_value=0)
 
-    def create(self, **validated_data):
+    def create(self, validated_data):
         return Movie.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
@@ -24,4 +24,5 @@ class MovieSerializer(serializers.Serializer):
             "duration",
             instance.duration
         )
+        instance.save()
         return instance
